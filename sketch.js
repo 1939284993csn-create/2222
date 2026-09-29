@@ -35,19 +35,14 @@ function draw() {
 }
 
 function getCanvasSize() {
-  const availableWidth = Math.max(280, windowWidth - 40);
-  const availableHeight = Math.max(210, windowHeight - 180);
-  let canvasWidth = Math.min(maxCanvasWidth, availableWidth);
-  let canvasHeight = canvasWidth / canvasRatio;
-
-  if (canvasHeight > availableHeight) {
-    canvasHeight = availableHeight;
-    canvasWidth = canvasHeight * canvasRatio;
-  }
+  const picture = document.getElementById("picture");
+  const containerWidth = picture ? picture.getBoundingClientRect().width : 0;
+  const fallbackWidth = Math.max(200, windowWidth - 88);
+  const canvasWidth = Math.min(maxCanvasWidth, Math.max(200, containerWidth || fallbackWidth));
 
   return {
     width: Math.floor(canvasWidth),
-    height: Math.floor(canvasHeight)
+    height: Math.floor(canvasWidth / canvasRatio)
   };
 }
 
